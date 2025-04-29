@@ -10,8 +10,8 @@ app.use(cors())
 const io = new Server(server, {
     cors:{
         origin: '*',
-        methods: ["GET", "POST"]
-    }
+        methods: ['GET', 'POST'],
+    },
 })
 
 app.get("/", (req, res)=>{
@@ -20,6 +20,11 @@ app.get("/", (req, res)=>{
 
 io.on("connection", (socket)=>{
     console.log("user connected with id,"+ socket.id)
+
+
+    socket.on("disconnect", ()=>{
+        console.log("user disconnected "+socket.id)
+    })
 })
 server.listen(3000, ()=>{
     console.log("server run on port 3000")
